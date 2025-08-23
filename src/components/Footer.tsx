@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
 import grasasbioLogo from "@/assets/grasasbio-logo.png";
-import isccLogo from "@/assets/iscc-logo.png";
 
 const Footer = () => {
   return (
@@ -19,17 +18,6 @@ const Footer = () => {
               <div>
                 <h3 className="text-lg font-bold">GrasasBio</h3>
                 <p className="text-sm opacity-80">S.A.S.</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <img 
-                src={isccLogo} 
-                alt="ISCC Certificación" 
-                className="h-12 w-auto bg-white p-1 rounded"
-              />
-              <div>
-                <p className="text-xs opacity-80">Certificación Internacional</p>
-                <p className="text-xs opacity-80">de Sostenibilidad y Carbono</p>
               </div>
             </div>
             <p className="text-sm opacity-90 leading-relaxed">
