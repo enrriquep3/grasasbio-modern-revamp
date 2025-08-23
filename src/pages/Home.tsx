@@ -1,14 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Recycle, Shield, Truck, Users, Leaf, Award } from "lucide-react";
-import heroFleet from "@/assets/hero-fleet.jpg";
+import { ArrowRight, Recycle, Shield, Truck, Users, Leaf, Award, UtensilsCrossed, School, Building, ShoppingCart, Coffee, Home as HomeIcon } from "lucide-react";
 import recyclingProcess from "@/assets/recycling-process.jpg";
+import { useAnimatedCounter } from "@/hooks/useAnimatedCounter";
 
 const Home = () => {
   const stats = [
-    { number: "10,435,689", label: "KG Aceite Recolectado", icon: Recycle },
-    { number: "7,900", label: "Clientes Atendidos", icon: Users },
-    { number: "40,000", label: "Litros de Agua Protegida", icon: Leaf },
+    { number: 10435689, label: "KG Aceite Recolectado", icon: Recycle },
+    { number: 7900, label: "Clientes Atendidos", icon: Users },
+    { number: 40000, label: "Litros de Agua Protegida", icon: Leaf },
+  ];
+
+  const clientTypes = [
+    { icon: UtensilsCrossed, label: "Restaurantes" },
+    { icon: School, label: "Centros Educativos" },
+    { icon: Building, label: "Cadenas" },
+    { icon: Coffee, label: "Industria Alimentaria" },
+    { icon: HomeIcon, label: "Panaderías" },
+    { icon: Building, label: "Conjuntos Residenciales" },
+    { icon: ShoppingCart, label: "Supermercados" },
+    { icon: Truck, label: "Catering" },
   ];
 
   const services = [
@@ -36,23 +47,37 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section 
-        className="relative min-h-[80vh] flex items-center justify-center bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroFleet})` }}
-      >
-        <div className="absolute inset-0 bg-black/40"></div>
+      {/* Hero Section with Video Background */}
+      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        {/* Video Background Placeholder */}
+        <video
+          className="absolute inset-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/api/placeholder/1920/1080"
+        >
+          <source src="/placeholder-video.mp4" type="video/mp4" />
+          {/* Fallback for browsers that don't support video */}
+        </video>
+        <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative z-10 container mx-auto px-4 text-center text-white">
           <div className="max-w-4xl mx-auto space-y-6 fade-in">
-            <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
-              Transformamos tu{" "}
-              <span className="text-gradient-orange">aceite usado</span> en{" "}
-              <span className="text-gradient-green">soluciones sostenibles</span>
-            </h1>
-            <p className="text-xl lg:text-2xl opacity-90 max-w-3xl mx-auto leading-relaxed">
-              Únete al cambio con GRASASBIO S.A.S. Líder en Colombia en la gestión responsable 
-              de aceites de cocina usados y grasas vegetales y animales.
-            </p>
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Recycle className="h-8 w-8 text-accent-orange" />
+              <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
+                Transformamos tu{" "}
+                <span className="text-gradient-orange">aceite de cocina usado</span> en{" "}
+                <span className="text-gradient-green">soluciones sostenibles</span>
+              </h1>
+            </div>
+            <div className="flex items-center justify-center gap-2 mb-6">
+              <span className="text-2xl">🌍</span>
+              <p className="text-xl lg:text-2xl opacity-90 max-w-3xl mx-auto leading-relaxed">
+                Únete al cambio con GRASASBIO S.A.S.
+              </p>
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
               <Button size="lg" className="bg-gradient-accent text-accent-orange-foreground hover:opacity-90 shadow-orange">
                 Solicita tu Recolección
@@ -66,21 +91,59 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Animated Stats Section */}
       <section className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center space-y-4 slide-up" style={{ animationDelay: `${index * 0.2}s` }}>
-                <stat.icon className="h-12 w-12 mx-auto text-accent-orange" />
-                <div className="space-y-2">
-                  <div className="text-4xl lg:text-5xl font-bold text-accent-orange">
-                    {stat.number}
+            {stats.map((stat, index) => {
+              const { count, elementRef } = useAnimatedCounter({ 
+                end: stat.number,
+                duration: 2500 + index * 300 
+              });
+              
+              return (
+                <div key={index} ref={elementRef} className="text-center space-y-4 slide-up" style={{ animationDelay: `${index * 0.2}s` }}>
+                  <stat.icon className="h-12 w-12 mx-auto text-accent-orange" />
+                  <div className="space-y-2">
+                    <div className="text-4xl lg:text-5xl font-bold text-accent-orange font-mono">
+                      {count.toLocaleString()}
+                    </div>
+                    <p className="text-lg opacity-90">{stat.label}</p>
                   </div>
-                  <p className="text-lg opacity-90">{stat.label}</p>
                 </div>
-              </div>
-            ))}
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Client Types Section */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-12 text-foreground">
+            Trabajamos con Diferentes Tipos de Clientes
+          </h2>
+          <div className="relative overflow-hidden">
+            <div className="flex animate-[scroll_20s_linear_infinite] gap-8 items-center justify-center">
+              {[...clientTypes, ...clientTypes].map((client, index) => (
+                <div key={index} className="flex flex-col items-center gap-3 min-w-[120px] group">
+                  <div className="w-16 h-16 bg-primary-light rounded-2xl flex items-center justify-center group-hover:bg-primary transition-colors">
+                    <client.icon className="h-8 w-8 text-primary group-hover:text-primary-foreground transition-colors" />
+                  </div>
+                  <span className="text-sm font-medium text-muted-foreground">{client.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="mt-8">
+            <Button 
+              size="lg" 
+              className="bg-gradient-accent text-accent-orange-foreground hover:opacity-90"
+              onClick={() => window.open('https://wa.me/573005995277', '_blank')}
+            >
+              Únete con Nosotros
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
           </div>
         </div>
       </section>
@@ -165,6 +228,86 @@ const Home = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Aliados Section */}
+      <section className="py-16 bg-muted">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-8 text-foreground">
+            Nuestros Aliados
+          </h2>
+          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Empresas líderes que confían en nuestros servicios para la gestión responsable de aceites usados
+          </p>
+          <div className="flex justify-center">
+            <div className="bg-white p-8 rounded-2xl shadow-medium max-w-4xl">
+              <img 
+                src="/lovable-uploads/fe8216cb-25b1-41d4-83dc-2c4a17e48e94.png" 
+                alt="Logos de empresas aliadas" 
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+          <p className="text-sm text-muted-foreground mt-6 italic">
+            En espera del envío de las imágenes en PNG para incluirlas
+          </p>
+        </div>
+      </section>
+
+      {/* Environmental Impact Section */}
+      <section className="py-20 bg-gradient-subtle">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center space-y-8">
+            <h2 className="text-4xl lg:text-5xl font-bold text-foreground">
+              El Impacto de la Mala Disposición del ACU
+            </h2>
+            <p className="text-xl text-muted-foreground leading-relaxed">
+              La mala disposición del Aceite de Cocina Usado (ACU) tiene consecuencias ambientales y sanitarias graves.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+              {[
+                { title: "Contaminar cuerpos de agua y suelos", icon: "💧" },
+                { title: "Afectar negativamente la fauna y flora local", icon: "🌱" },
+                { title: "Contribuir al cambio climático", icon: "🌍" },
+                { title: "Generar obstrucciones en redes de saneamiento", icon: "🚰" },
+                { title: "Agravar problemas de salud pública", icon: "⚕️" },
+              ].map((impact, index) => (
+                <Card key={index} className="p-6 text-center scale-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <div className="text-4xl mb-4">{impact.icon}</div>
+                  <p className="text-sm text-muted-foreground">{impact.title}</p>
+                </Card>
+              ))}
+            </div>
+
+            <div className="bg-gradient-hero text-primary-foreground p-8 rounded-2xl mt-12">
+              <h3 className="text-2xl font-bold mb-4">📌 Dato Impactante</h3>
+              <p className="text-lg leading-relaxed">
+                Un solo litro de ACU puede contaminar hasta <strong>40.000 litros de agua</strong>, 
+                lo que equivale al consumo doméstico de agua de una persona durante un año.
+              </p>
+            </div>
+
+            <div className="text-left max-w-2xl mx-auto mt-12">
+              <h3 className="text-2xl font-bold mb-6 text-foreground">¿Cómo prevenirlo?</h3>
+              <p className="text-lg mb-4 text-muted-foreground">Recicla el aceite de manera adecuada:</p>
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-2xl">🧴</span>
+                <p className="text-muted-foreground">
+                  Almacénalo en un recipiente plástico con tapa y programa tu recolección con GRASASBIO.
+                </p>
+              </div>
+              <Button 
+                size="lg" 
+                className="bg-gradient-accent text-accent-orange-foreground hover:opacity-90 w-full"
+                onClick={() => window.open('https://wa.me/573005995277', '_blank')}
+              >
+                Solicita tu Recolección
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </div>
           </div>
         </div>
       </section>
