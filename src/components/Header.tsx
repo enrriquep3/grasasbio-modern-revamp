@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { Menu, X, Phone, Mail, MessageCircle } from "lucide-react";
 import grasasbioLogo from "@/assets/grasasbio-logo.png";
+import isccLogo from "@/assets/iscc-logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
   const navigation = [
-    { name: "Inicio", href: "/" },
-    { name: "Quiénes Somos", href: "/about" },
-    { name: "Servicios", href: "/services" },
-    { name: "ACU", href: "/acu" },
-    { name: "Contacto", href: "/contact" },
+    { name: "INICIO", href: "/" },
+    { name: "SERVICIOS", href: "/services" },
+    { name: "QUIÉNES SOMOS", href: "/about" },
+    { name: "¿CÓMO LO HACEMOS?", href: "/proceso" },
+    { name: "¿QUÉ ES EL ACU?", href: "/acu" },
+    { name: "CONTACTO", href: "/contact" },
+    { name: "GRABITEC", href: "/grabitec" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -32,9 +35,25 @@ const Header = () => {
               <Mail className="h-4 w-4" />
               comercial@grasasbio.com
             </a>
+            <a 
+              href="https://wa.me/573052665845" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-muted-foreground hover:text-success transition-colors"
+            >
+              <MessageCircle className="h-4 w-4" />
+              WhatsApp: 305 266 5845
+            </a>
           </div>
-          <div className="text-muted-foreground text-xs">
-            Líderes en gestión responsable de aceites usados
+          <div className="flex items-center gap-4">
+            <img 
+              src={isccLogo} 
+              alt="ISCC Certificación" 
+              className="h-6 w-auto"
+            />
+            <div className="text-muted-foreground text-xs">
+              Líderes en gestión responsable de aceites usados
+            </div>
           </div>
         </div>
       </div>
@@ -57,15 +76,15 @@ const Header = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-8">
+            <nav className="hidden lg:flex items-center space-x-6">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                  className={`text-xs font-monaco font-bold transition-colors hover:text-primary ${
                     isActive(item.href) 
                       ? "text-primary" 
-                      : "text-muted-foreground"
+                      : "text-foreground"
                   }`}
                 >
                   {item.name}
@@ -78,7 +97,7 @@ const Header = () => {
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden p-2"
+              className="lg:hidden p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -87,16 +106,16 @@ const Header = () => {
 
           {/* Mobile Navigation */}
           {isMenuOpen && (
-            <div className="md:hidden py-4 border-t">
+            <div className="lg:hidden py-4 border-t">
               <nav className="flex flex-col space-y-4">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`text-sm font-medium transition-colors hover:text-primary px-2 py-1 ${
+                    className={`text-sm font-monaco font-bold transition-colors hover:text-primary px-2 py-1 ${
                       isActive(item.href)
                         ? "text-primary bg-primary-light"
-                        : "text-muted-foreground"
+                        : "text-foreground"
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
