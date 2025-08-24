@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Mail, MessageCircle } from "lucide-react";
 import grasasbioLogo from "@/assets/grasasbio-logo.png";
-import isccLogo from "@/assets/iscc-logo.png";
+import isccLogo from "@/assets/iscc-logo-new.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,8 +15,10 @@ const Header = () => {
     { name: "QUIÉNES SOMOS", href: "/about" },
     { name: "¿CÓMO LO HACEMOS?", href: "/proceso" },
     { name: "¿QUÉ ES EL ACU?", href: "/acu" },
+    { name: "NORMATIVIDAD", href: "/normatividad" },
     { name: "CONTACTO", href: "/contact" },
     { name: "GRABITEC", href: "/grabitec" },
+    { name: "PUNTOS LIMPIOS", href: "/puntos-limpios" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -36,13 +38,13 @@ const Header = () => {
               comercial@grasasbio.com
             </a>
             <a 
-              href="https://wa.me/573052665845" 
+              href="https://wa.me/573005995277" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-muted-foreground hover:text-success transition-colors"
             >
               <MessageCircle className="h-4 w-4" />
-              WhatsApp: 305 266 5845
+              WhatsApp: 300 599 5277
             </a>
           </div>
           <div className="flex items-center gap-4">

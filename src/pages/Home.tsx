@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Recycle, Shield, Truck, Users, Leaf, Award, UtensilsCrossed, School, Building, ShoppingCart, Coffee, Home as HomeIcon } from "lucide-react";
+import { ArrowRight, Recycle, Shield, Truck, Users, Leaf, Award, UtensilsCrossed, School, Building, ShoppingCart, Coffee, Home as HomeIcon, Droplets, Globe, AlertTriangle, Heart, Wind } from "lucide-react";
 import recyclingProcess from "@/assets/recycling-process.jpg";
 import { useAnimatedCounter } from "@/hooks/useAnimatedCounter";
 
@@ -58,7 +58,7 @@ const Home = () => {
           playsInline
           poster="/api/placeholder/1920/1080"
         >
-          <source src="/placeholder-video.mp4" type="video/mp4" />
+          <source src="/videocorporativo.mp4" type="video/mp4" />
           {/* Fallback for browsers that don't support video */}
         </video>
         <div className="absolute inset-0 bg-black/50"></div>
@@ -106,7 +106,7 @@ const Home = () => {
                   <stat.icon className="h-12 w-12 mx-auto text-accent-orange" />
                   <div className="space-y-2">
                     <div className="text-4xl lg:text-5xl font-bold text-accent-orange font-mono">
-                      {count.toLocaleString()}
+                      {count.toLocaleString('es-CO').replace(/,/g, '.')}
                     </div>
                     <p className="text-lg opacity-90">{stat.label}</p>
                   </div>
@@ -269,14 +269,17 @@ const Home = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
               {[
-                { title: "Contaminar cuerpos de agua y suelos", icon: "💧" },
-                { title: "Afectar negativamente la fauna y flora local", icon: "🌱" },
-                { title: "Contribuir al cambio climático", icon: "🌍" },
-                { title: "Generar obstrucciones en redes de saneamiento", icon: "🚰" },
-                { title: "Agravar problemas de salud pública", icon: "⚕️" },
+                { title: "Contaminar cuerpos de agua y suelos", icon: Droplets },
+                { title: "Afectar negativamente la fauna y flora local", icon: Leaf },
+                { title: "Contribuir al cambio climático", icon: Globe },
+                { title: "Generar obstrucciones en redes de saneamiento", icon: AlertTriangle },
+                { title: "Agravar problemas de salud pública", icon: Heart },
+                { title: "Crear malos olores y atraer plagas", icon: Wind },
               ].map((impact, index) => (
                 <Card key={index} className="p-6 text-center scale-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                  <div className="text-4xl mb-4">{impact.icon}</div>
+                  <div className="w-16 h-16 bg-destructive/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <impact.icon className="h-8 w-8 text-destructive" />
+                  </div>
                   <p className="text-sm text-muted-foreground">{impact.title}</p>
                 </Card>
               ))}

@@ -147,9 +147,13 @@ All colors MUST be HSL. Green (sustainability) + Orange (energy) palette.
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
+  /* Import Monaco Font */
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
+
   /* Professional Typography */
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold tracking-tight;
+    font-family: 'Roboto Mono', 'Monaco', monospace;
   }
 
   h1 {
