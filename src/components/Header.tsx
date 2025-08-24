@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone, Mail, MessageCircle } from "lucide-react";
 import grasasbioLogo from "@/assets/grasasbio-logo.png";
-import isccLogo from "@/assets/iscc-logo-new.png";
+import isccLogo from "@/assets/iscc-logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
